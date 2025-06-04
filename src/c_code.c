@@ -42,14 +42,16 @@ int main() {
         printf("TYPE A LETTER: ");
         scanf(" %c", &res);
 
-        if(res >= 'a' && res <= 'z') {
-            res -= 32;
+        if ((res >= 'a' && res <= 'z') || (res >= 'A' && res <= 'Z')){
+            if(res >= 'a' && res <= 'z') res -= 32;
+                acertou = missile(res, code);
+                if(!acertou) {
+                    count++;
+            }
+        } else {
+            printf("Não é letra, tente novamente.\n");
         }
-
-        acertou = missile(res, code);
-        if(!acertou) {
-            count++;
-        }
+        
     }
 
     if(!acertou) {
