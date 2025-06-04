@@ -39,7 +39,7 @@ int main() {
     printf(" \n");
 
     while(count < 4 && !acertou) {
-        printf("Digite uma letra: ");
+        printf("TYPE A LETTER: ");
         scanf(" %c", &res);
 
         if(res >= 'a' && res <= 'z') {
@@ -49,12 +49,12 @@ int main() {
         acertou = missile(res, code);
         if(!acertou) {
             count++;
-            printf("Você errou %d vezes\n", count);
         }
     }
 
     if(!acertou) {
-        printf("Fim de jogo! A letra era: %c\n", code);
+        printf("YOU BLEW IT\n");
+        printf("THE CORRET CODE WAS: %c\n", code);
     }
 
     return 0;
