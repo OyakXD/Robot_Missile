@@ -148,3 +148,33 @@ game_over:
     mov rax, 60
     mov rdi, 1              
     syscall
+
+missile:
+    cmp al, bl
+    je missile_achou
+    jl missile_depois       
+    jmp missile_antes     
+
+missile_antes:
+    lea rdi, [msg_before]
+    call print_string
+    mov al, [tentativa]     
+    call print_char
+    lea rdi, [newline]
+    call print_string
+    mov al, 0              
+    ret
+
+missile_depois:
+    lea rdi, [msg_after]
+    call print_string
+    mov al, [tentativa]     
+    call print_char
+    lea rdi, [newline]
+    call print_string
+    mov al, 0               
+    ret
+
+missile_achou:
+    mov al, 1               
+    ret
