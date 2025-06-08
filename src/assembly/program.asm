@@ -178,3 +178,50 @@ missile_depois:
 missile_achou:
     mov al, 1               
     ret
+
+read_char:
+    mov rax, 0              ; sys_read
+    mov rdi, 0              ; stdin
+    lea rsi, [tentativa]    ; buffer
+    mov rdx, 2              ; lê 2 bytes (char + newline)
+    syscall
+    
+    ; Converte para maiúscula se for minúscula
+    mov al, [tentativa]
+    cmp al, 'a'
+    jl not_lowercase
+    cmp al, 'z'
+    jg not_lowercase
+    sub al, 32              ; converte para maiúscula
+    
+not_lowercase:
+    ret
+
+print_string:
+    mov rsi, rdi            ; copia endereço da string
+    xor rcx, rcx            ; contador = 0
+
+count_loop:
+    cmp byte [rsi + rcx], 0 ; verifica fim da string
+    je print_now
+    inc rcx
+    jmp count_loop
+
+print_now:
+    mov rax, 1              ; sys_write
+    mov rdi, 1              ; stdout
+    mov rsi, rsi            ; endereço da string
+    mov rdx, rcx            ; tamanho
+    syscall
+    ret
+
+print_char:
+    push rax                ; salva registrador
+    mov [tentativa], al     ; usa buffer temporário
+    mov rax, 1              ; sys_write
+    mov rdi, 1              ; stdout
+    lea rsi, [tentativa]    ; endereço do caractere
+    mov rdx, 1              ; 1 byte
+    syscall
+    pop rax                 ; restaura registrador
+    ret
