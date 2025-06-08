@@ -1,0 +1,6 @@
+a.out*
+.vscode*
+src/assembly/program.o*
+src/assembly/program*
+src/assembly/printTest.txt
+
