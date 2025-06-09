@@ -78,7 +78,7 @@ generate_code:
     div rbx
 
     mov al, [alfabeto + rdx]
-    mov [letra_escolhida], al
+    mov [codigo], al
     ret
 
 game_loop:
